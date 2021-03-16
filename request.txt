@@ -1,0 +1,78 @@
+1-Получить перечень спортивных сооружений указанного типа в целом или
+удовлетворяющих заданным характеристикам (например, стадионы, вмещающие не
+менее указанного числа зрителей).
+
+SELECT * FROM Facilities WHERE Type="Pool" AND Capacity>200;
+
+2. Получить список спортсменов, занимающихся указанным видом спорта в целом либо
+не ниже определенного разряда.
+
+SELECT Sportmans.* FROM Sportmans INNER JOIN Sportman_Sports ON Sportmans.ID_Sportman = Sportman_Sports.ID_Sportman INNER JOIN Clubs ON Sportman_Sports.Club = Clubs.club
+INNER JOIN Trainers ON Clubs.Club = Trainers.Club WHERE Categorie = "Second" OR Categorie = "Frist";
+
+3. Получить список спортсменов, тренирующихся у некого тренера в целом либо не ниже
+определенного разряда.
+
+SELECT Sportmans.* FROM Sportmans INNER JOIN Sportman_Sports ON Sportmans.ID_Sportman = Sportman_Sports.ID_Sportman INNER JOIN Clubs ON Sportman_Sports.Club = Clubs.club
+INNER JOIN Trainers ON Clubs.Club = Trainers.Club WHERE Club = NULL;
+
+
+4. Получить список спортсменов, занимающихся более чем одним видом спорта с
+указанием этих видов спорта.
+SELECT Sportmans.ID_Sportman, COUNT(*) AS CNT FROM Sportmans INNER JOIN Sportman_Sports ON Sportmans.ID_Sportman = Sportman_Sports.ID_Sportman  GROUP BY Sportmans.ID_Sportman HAVING CNT > 1;
+
+5. Получить список тренеров указанного спортсмена.
+
+SELECT Sportmans.* FROM Sportmans INNER JOIN Sportman_Trainers ON Sportmans.ID_Sportman=Sportman_Trainers.ID_Sportman;
+
+6. Получить перечень соревнований, проведенных в течение заданного периода времени
+в целом либо указанным организатором.
+
+SELECT * FROM Competitions WHERE (((Competitions.Date) Between #01/12/2019# And #01/2/2020#) AND
+((Competitions.Organisator)="Fifa"));
+7. Получить список призеров указанного соревнования.
+
+SELECT * FROM Competitions WHERE (Date BETWEEN '2020/07/10' AND '2022/07/1') AND Organisator="UKK" ;
+
+8. Получить перечень соревнований, проведенных в указанном спортивном сооружении в
+целом либо по определенному виду спорта.
+SELECT * FROM Competitions c  INNER JOIN Facilities f ON c.Place = f.ID_Facilitie WHERE Name="Arena"  AND Sport ="Cycling"
+9. Получить перечень спортивных клубов и число спортсменов этих клубов,
+участвовавших в спортивных соревнованиях в течение заданного интервала времени.
+
+10. Получить список тренеров по определенному виду спорта.
+11. Получить список спортсменов, не участвовавших ни в каких соревнованиях в течение
+определенного периода времени.
+12. Получить список организаторов соревнований и число проведенных ими
+соревнований в течение определенного периода времени.
+13. Получить перечень спортивных сооружений и даты проведения на них соревнований
+в течение определенного периода времени. 
+
+1-Obtenir une liste des installations sportives du type spécifié en général, ou
+satisfaisant aux caractéristiques spécifiées (par exemple, des stades qui peuvent
+inférieur au nombre de spectateurs spécifié).
+2. Obtenez une liste des athlètes impliqués dans le sport spécifié en général, ou
+pas inférieur à une certaine catégorie.
+3. Obtenez une liste des athlètes qui s'entraînent avec un certain entraîneur en général ou non ci-dessous
+une certaine catégorie.
+4. Obtenez une liste d'athlètes impliqués dans plus d'un sport avec
+indiquant ces sports.
+5. Récupérez la liste des entraîneurs pour l'athlète spécifié.
+6. Obtenez une liste des compétitions organisées pendant une période donnée
+en général ou par l'organisateur spécifié.
+7. Obtenez une liste des gagnants du concours spécifié.
+8. Obtenez une liste des compétitions organisées dans l'installation sportive spécifiée en
+en général ou dans un sport spécifique.
+9. Obtenir une liste des clubs sportifs et le nombre d'athlètes de ces clubs,
+participer à des compétitions sportives pendant un intervalle de temps donné.
+SELECT Sportmans.* FROM Sportmans s INNER JOIN Competitor c ON s.ID_Sportman = c.ID_Sportman INNEr JOIN Sportman_Sports ss ON s.ID_Sportman = ss.ID_Sportman 
+
+
+SELECT Club.* FROM Clubs c INNER JOIN Sportman_Sports ss ON c.Club = ss.Club INNER JOIN Sportmans s ON ss.ID_Sportman = s.ID_Sportman INNER JOIN Competitor co ON s.ID_Sportman = co.ID_Sportman
+10. Obtenez une liste d'entraîneurs pour un sport spécifique.
+11. Obtenez une liste des athlètes qui n'ont participé à aucune compétition pendant
+une certaine période de temps.
+12. Obtenez une liste des organisateurs de la compétition et le nombre d'événements organisés par eux
+compétitions sur une période de temps.
+13. Obtenez une liste des installations sportives et les dates des compétitions là-bas
+sur une période de temps.
